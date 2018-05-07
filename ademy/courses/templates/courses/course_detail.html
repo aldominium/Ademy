@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% load  humanize course_extras %}
+
+{% block title %} {{course.title}} {% endblock %}
+
+
+{% block content %}
+
+<article>
+    <h2>{{ course.title }}</h2>
+    {{ course.description }}
+
+    <p>Hay {{ course.lesson_set.count|apnumber }} leccion{{ course.lesson_set.count|pluralize:"es" }} en este curso: {{ course.lesson_set.all|join:", " }} </p>
+
+    <section>
+
+        {% for lesson in course.lesson_set.all %}
+            <h3>
+                <a href="{% url 'courses:lesson_detail' course_pk=lesson.course.pk lesson_pk=lesson.pk%}">{{ lesson.title }} </a>
+                
+            </h3>
+            {{ lesson.description|markdown_to_html }}
+
+        {% endfor %}
+
+    </section>
+
+</article>
+
+{% endblock %}

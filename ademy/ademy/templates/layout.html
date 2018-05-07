@@ -1,0 +1,22 @@
+{% load static from staticfiles%}
+{% load course_extras %}
+
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    {% block static %}{% endblock %}
+  </head>
+  <body>
+    <div class="site-container">
+      <nav>
+        <a href="{% url 'home' %}">Ademy</a>
+        <a href="{% url 'courses:list' %}">Cursos</a>
+      </nav>
+      <p>No te pierdas nuestro último curso: {% last_course %}</p>
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

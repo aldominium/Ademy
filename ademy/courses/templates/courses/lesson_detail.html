@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load course_extras %}
+
+{% block title %} {{ lesson.title }} - {{ lesson.course.title }} {% endblock %}
+
+{% block content %}
+<article>
+    <h2>
+        <a href="{% url 'courses:detail' pk=lesson.course.pk %}">{{ lesson.course.title }}</a>
+    </h2>
+    <h3>{{ lesson.title }}</h3>
+
+    {% with content=lesson.content  %}
+
+        {{ content|linebreaks }} 
+        
+        Contenido: {{ content|wordcount }} palabras. Tiempo estimado: {{ content|wordcount|time_estimate }} 
+        minuto{{ content|wordcount|time_estimate|pluralize }}.
+
+    {% endwith %}
+</article>
+{% endblock %}
